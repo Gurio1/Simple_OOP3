@@ -1,1 +1,1 @@
-[embed]https://drive.google.com/file/d/1DeyMB1nRqRwrGnmQPyab88MvQJrTCivY/preview.pdf[/embed]
+[embed]https://drive.google.com/file/d/1DeyMB1nRqRwrGnmQPyab88MvQJrTCivY/preview[/embed]
