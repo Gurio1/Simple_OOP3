@@ -9,10 +9,10 @@ namespace KursovaPP._2
         //Work like .Split(" "). But if elements in [ ],then we don't split them. 
         public static string[] Filter(this string mainStr)
         {
-            
+
             List<string> splitedElem = new List<string>();
 
-            string temp=string.Empty;
+            string temp = string.Empty;
 
             while (mainStr.Contains(' '))
             {
@@ -25,12 +25,12 @@ namespace KursovaPP._2
                         Program.DataProcess();
                     }
                     index = mainStr.IndexOf(']');
-                    temp = Remove(index,ref mainStr);
-                    temp = TrimElement(temp);    
+                    temp = Remove(index, ref mainStr);
+                    temp = TrimElement(temp);
                 }
                 else
                 {
-                    temp = Remove(index,ref mainStr);
+                    temp = Remove(index, ref mainStr);
                     Validation(temp);
                 }
                 if (temp == "")
@@ -50,7 +50,7 @@ namespace KursovaPP._2
 
             return splitedElem.ToArray();
 
-            string Remove(int index,ref string str)
+            string Remove(int index, ref string str)
             {
                 string temp = str.Remove(index);
                 str = str.Remove(0, index + 1);
@@ -70,4 +70,4 @@ namespace KursovaPP._2
             }
         }
     }
-    }
+}

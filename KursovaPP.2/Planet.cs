@@ -8,31 +8,25 @@ namespace KursovaPP._2
             public string Name { get; private set; }
             public string PlanetType { get; private set; }
 
-            private bool supportLife;
+            private bool _supportLife;
             public bool IsSupportLife
             {
-               get { return supportLife; }
+               get { return _supportLife; }
 
-               set { supportLife = value; }
+               set { _supportLife = value; }
 
             }
 
             public List<Moon> Moons = new List<Moon>();
             public Planet(string name, string planetType, string supportLife)
             {
-                this.Name = name;
-                this.PlanetType = planetType;
+                Name = name;
+                PlanetType = planetType;
                 if(supportLife.Equals("yes"))
-                   this.IsSupportLife = true;
+                   IsSupportLife = true;
                 else
-                   this.IsSupportLife = false;
+                   IsSupportLife = false;
             }
-
-            public void AddMoon(string name)
-            {
-               Moons.Add(new Moon(name));
-            }
-
         public StringBuilder Print()
         {
             StringBuilder sb = new StringBuilder();

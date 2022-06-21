@@ -15,9 +15,9 @@ namespace KursovaPP._2
 
         public Galaxy(string name, string type, string age)
         {
-            this.Name = name;
-            this.Type = type;
-            this.Age = age;
+            Name = name;
+            Type = type;
+            Age = age;
         }
 
         public void AddStar(string name, double mass, double size, double temp, double luminosity,char clas)

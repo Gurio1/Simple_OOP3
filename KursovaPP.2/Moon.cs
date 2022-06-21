@@ -7,7 +7,7 @@ namespace KursovaPP._2
             public string Name { get; private set; }
             public Moon(string name)
             {
-                this.Name = name;
+                Name = name;
             }
 
         public StringBuilder Print()

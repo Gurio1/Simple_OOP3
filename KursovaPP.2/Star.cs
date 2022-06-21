@@ -19,20 +19,14 @@ namespace KursovaPP._2
         public List<Planet> Planets = new List<Planet>();
         public Star(string name, double mass, double size, double temp, double luminosity,char clas)
         {
-            this.Name = name;
-            this.Mass = mass;
-            this.Size = size/2;
-            this.Temp = temp;
-            this.Luminosity = luminosity;
-            this.Class = clas;
+            Name = name;
+            Mass = mass;
+            Size = size/2;
+            Temp = temp;
+            Luminosity = luminosity;
+            Class = clas;
 
         }
-
-        public void AddPlanet(string name, string planetType, string supportLife)
-        {
-            Planets.Add(new Planet(name, planetType, supportLife));
-        }
-
         public  StringBuilder Print()
         {
             StringBuilder sb = new StringBuilder();
