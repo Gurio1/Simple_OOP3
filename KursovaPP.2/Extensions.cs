@@ -48,26 +48,30 @@ namespace KursovaPP._2
 
             splitedElem.Add(mainStr);
 
+           // if(splitedElem { Count: 5})
             return splitedElem.ToArray();
 
-            string Remove(int index, ref string str)
+            
+        }
+
+        private static string Remove(int index, ref string str)
+        {
+            string temp = str.Remove(index);
+            str = str.Remove(0, index + 1);
+            return temp;
+        }
+        private static void Validation(string str)
+        {
+            if (str.StartsWith(']') || str.EndsWith('[') || str.EndsWith(']'))
             {
-                string temp = str.Remove(index);
-                str = str.Remove(0, index + 1);
-                return temp;
-            }
-            void Validation(string str)
-            {
-                if (str.StartsWith(']') || str.EndsWith('[') || str.EndsWith(']'))
-                {
-                    Console.WriteLine("Incorrect format");
-                    Program.DataProcess();
-                }
-            }
-            string TrimElement(string element)
-            {
-                return element.Trim(new char[] { '[', ']' });
+                Console.WriteLine("Incorrect format");
+                Program.DataProcess();
             }
         }
+        private static string TrimElement(string element)
+        {
+            return element.Trim(new char[] { '[', ']' });
+        }
+
     }
 }

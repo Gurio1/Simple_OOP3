@@ -3,7 +3,7 @@ using System.Text;
 
 namespace KursovaPP._2
 {
-    class Planet
+    class Planet: Service
     {
             public string Name { get; private set; }
             public string PlanetType { get; private set; }
@@ -16,8 +16,7 @@ namespace KursovaPP._2
                set { _supportLife = value; }
 
             }
-
-            public List<Moon> Moons = new List<Moon>();
+            public List<Moon> moons = new List<Moon>();
             public Planet(string name, string planetType, string supportLife)
             {
                 Name = name;
@@ -34,11 +33,11 @@ namespace KursovaPP._2
             sb.AppendLine($"\t\tType: {PlanetType}");
             sb.AppendLine($"\t\tSupport life: {IsSupportLife}");
             sb.AppendLine($"\t\tMoons:");
-            foreach (var a in Moons)
+            foreach (var a in moons)
             {
                 sb.AppendLine(a.Print().ToString());
             }
-            if (Moons.Count == 0)
+            if (moons.Count == 0)
                 sb.AppendLine("\t\t\t@ none");
             return sb;
         }

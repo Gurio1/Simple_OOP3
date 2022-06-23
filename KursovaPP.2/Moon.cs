@@ -2,14 +2,13 @@
 
 namespace KursovaPP._2
 {
-    class Moon
-        {
+    class Moon: Service
+    {
             public string Name { get; private set; }
             public Moon(string name)
             {
                 Name = name;
             }
-
         public StringBuilder Print()
         {
             StringBuilder sb = new StringBuilder();
