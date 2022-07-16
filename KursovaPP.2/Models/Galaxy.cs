@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace KursovaPP._2
+namespace KursovaPP._2.Models
 {
-    class Galaxy: Service
+    public class Galaxy : IGalaxible
     {
         public string Name { get; private set; }
         public string Type { get; private set; }
         public string Age { get; private set; }
+
+        public string TypeOfObject => "Galaxy";
 
         public List<Star> stars = new List<Star>();
         public Galaxy(string name, string type, string age)
@@ -24,7 +26,7 @@ namespace KursovaPP._2
             sb.AppendLine($"Type: {Type}");
             sb.AppendLine($"Age: {Age}");
             sb.AppendLine("Stars:");
-            foreach(var a in stars)
+            foreach (var a in stars)
             {
                 sb.AppendLine(a.Print().ToString());
             }

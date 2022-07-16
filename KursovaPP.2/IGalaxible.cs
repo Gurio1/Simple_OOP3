@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace KursovaPP._2
 {
-    internal class Service
+    public interface IGalaxible
     {
+        String Name { get; }
+
+        String Type { get; }
     }
 }
