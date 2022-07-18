@@ -53,7 +53,6 @@ namespace KursovaPP._2
 
             
         }
-
         private static string Remove(int index, ref string str)
         {
             string temp = str.Remove(index);

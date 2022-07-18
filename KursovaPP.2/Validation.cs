@@ -1,6 +1,7 @@
 ﻿using KursovaPP._2.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,6 @@ namespace KursovaPP._2
 {
     public class Validation
     {
-        private IEnumerable<Galaxy> _db;
-        public Validation(IEnumerable<Galaxy> DbGalaxy)
-        {
-            _db = DbGalaxy;
-        }
         public void IsExist(IGalaxible obj)
         {
             if (obj == null)
@@ -22,20 +18,20 @@ namespace KursovaPP._2
                 Program.DataProcess();
             }
         }
-        public void IsExist(string type, string name)
+        public void IsExist(string type, string name,List<Galaxy>db)
         {
             var rezult = () => type switch
             {
-                "galaxy" => _db.Any(galaxy => galaxy.Name.Equals(name)),
+                "galaxy" => db.Any(galaxy => galaxy.Name.Equals(name)),
 
-                "star" => _db.Any(galaxy => galaxy.stars
+                "star" => db.Any(galaxy => galaxy.stars
                                   .Any(star => star.Name.Equals(name))),
 
-                "planet" => _db.Any(galaxy => galaxy.stars
+                "planet" => db.Any(galaxy => galaxy.stars
                                     .Any(star => star.planets
                                     .Any(planet => planet.Name.Equals(name)))),
 
-                "moon" => _db.Any(galaxy => galaxy.stars
+                "moon" => db.Any(galaxy => galaxy.stars
                                   .Any(star => star.planets
                                   .Any(planet => planet.moons
                                   .Any(moon => moon.Name.Equals(name)))))
@@ -55,6 +51,24 @@ namespace KursovaPP._2
 
                 Program.DataProcess();
             }
+        }
+        public double [] ValidateAndParseToDouble(params string [] strings)
+        {
+            var culture = CultureInfo.InvariantCulture;
+            var style = NumberStyles.Currency;
+            double [] methodRezult = new double [strings.Length];
+            double tryParseRezult = 0;
+            for (int i = 0; i < methodRezult.Length; i++)
+            {
+                bool isParsed = double.TryParse(strings[i],style,culture, out tryParseRezult);
+                if (!isParsed)
+                {
+                    Console.WriteLine("Incorrect data for Star stats!");
+                    Program.DataProcess();
+                }
+                methodRezult[i] = tryParseRezult;
+            }
+            return methodRezult;
         }
     }
 

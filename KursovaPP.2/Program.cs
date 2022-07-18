@@ -10,52 +10,49 @@ namespace KursovaPP._2
 {
     class Program
     {
-        private static List<Galaxy> galaxyes = new List<Galaxy>();
-        public static Validation validator = new Validation(galaxyes);
-        private static GalaxyContext db = new GalaxyContext(galaxyes,validator);
-        public static Stats print = new Stats(galaxyes);
+        public static Validation validator = new Validation();
+        private static GalaxyRepository db = new GalaxyRepository(validator);
         private delegate void AddComand(string[] args);
         private static Dictionary<string, AddComand> AddComands = new Dictionary<string, AddComand>();
-
         static Program()
         {
             #region Add commands to the Dictionary
             AddComands.Add("add galaxy", args =>
             {
-                validator.IsExist(args[1].ToLower(), args[2]);
-                galaxyes.Add(new Galaxy(args[2], args[3], args[4]));
+                db.IsExist(args[1].ToLower(), args[2]);
+                db.AddGalaxy(args[2], args[3], args[4]);
             });
             AddComands.Add("add star", args =>
             {
-                validator.IsExist(args[1].ToLower(), args[3]);
+                db.IsExist(args[1].ToLower(), args[3]);
                 var culture = CultureInfo.InvariantCulture;
-                db.AddStar(args[2], args[3], Convert.ToDouble(args[4], culture), Convert.ToDouble(args[5], culture), Convert.ToDouble(args[6], culture), Convert.ToDouble(args[7], culture));
+                double[] parsedProps = validator.ValidateAndParseToDouble(args[4], args[5], args[6], args[7]);
+                db.AddStar(args[2], args[3], parsedProps[0], parsedProps[1], parsedProps[2], parsedProps[3]);
             });
             AddComands.Add("add planet", args =>
             {
-                validator.IsExist(args[1].ToLower(), args[3]);
+                db.IsExist(args[1].ToLower(), args[3]);
                 db.AddPlanet(args[2], args[3], args[4], args[5]);
             });
             AddComands.Add("add moon", args =>
             {
-                validator.IsExist(args[1].ToLower(), args[3]);
+                db.IsExist(args[1].ToLower(), args[3]);
                 db.AddMoon(args[2], args[3]);
             });
             #endregion
         }
         public static void DataProcess()
         {
-
             bool inProgress = true;
-            using (StreamReader sr = new StreamReader("./text.txt"))
+            //using (StreamReader sr = new StreamReader("./text.txt"))
+            //{
+            while (inProgress)
             {
-                while (inProgress)
-            {
-                    string temp = sr.ReadLine();
-                    if (temp == null)
-                        break;
-                    string[] input = temp.Filter();
-                    //string[] input = Console.ReadLine().Filter();
+                //string temp = sr.ReadLine();
+                //if (temp == null)
+                //    break;
+                //string[] input = temp.Filter();
+                string[] input = Console.ReadLine().Filter();
                 switch (input[0].ToLower())
                 {
                     case "add":
@@ -63,13 +60,13 @@ namespace KursovaPP._2
                         AddComands[key](input);
                         break;
                     case "stats":
-                        print.PrintStats();
+                        db.PrintStats();
                         break;
                     case "list":
-                        print.ListOF(input[1].ToLower());
+                        db.ListOF(input[1].ToLower());
                         break;
                     case "print":
-                        galaxyes.First(x => x.Name.Equals(input[1])).PrintGalaxyStats();
+                        db.FindGalaxy(x => x.Name.Equals(input[1])).PrintGalaxyStats();
                         break;
                     case "exit":
                         inProgress = false;
@@ -78,14 +75,12 @@ namespace KursovaPP._2
                         Console.WriteLine("Upps,something wrong");
                         break;
                 }
-                }
+                // }
             }
         }
         static void Main(string[] args)
         {
-
             DataProcess();
-
         }
     }
 }
